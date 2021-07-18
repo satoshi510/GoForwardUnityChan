@@ -14,6 +14,8 @@ public class UnityChanController : MonoBehaviour
     private float dump = -0.8f;
     //ジャンプの速度
     float jumpVelocity = 20;
+    //ゲームオーバーになる位置
+    private float deadLine = -9;
 
 
     // Start is called before the first frame update
@@ -49,6 +51,16 @@ public class UnityChanController : MonoBehaviour
             {
                 this.rigid2D.velocity *= this.dump;
             }
+        }
+
+        //デッドラインを超えた場合ゲームオーバーにする
+        if(transform.position.x < this.deadLine)
+        {
+            //UIControllerのGameOver関数を呼び出して画面上に「GameOver」と表示する
+            GameObject.Find("Canvas").GetComponent<UIController>().GameOver();
+
+            //ユニティちゃんを破棄する
+            Destroy(gameObject);
         }
     }
 }
