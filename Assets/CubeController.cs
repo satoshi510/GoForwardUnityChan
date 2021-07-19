@@ -10,10 +10,11 @@ public class CubeController : MonoBehaviour
     //è¡ñ≈à íu
     private float deadLine = -10;
 
+    private AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
-        
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,6 +27,14 @@ public class CubeController : MonoBehaviour
         if(transform.position.x < this.deadLine)
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "CubePrefabTag" || other.gameObject.tag == "groundTag" )
+        {
+            audio.Play();
         }
     }
 }
